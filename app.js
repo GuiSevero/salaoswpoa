@@ -8,6 +8,9 @@ var express = require('express'),
     querystring = require('querystring'),
     _ = require('underscore');
 
+
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
 mongoose.connect(process.env.MONGOHQ_URL || MONGOHQ_URL);
 Salon = mongoose.model('Salon', {
     name: String,
@@ -23,12 +26,12 @@ Salon = mongoose.model('Salon', {
         uf: String
     },
     ratings: [{
-        user_id: String,
+        client: ObjectId,
         rating: Number,
         date: Date
     }],
     comments: [{
-        author: String,
+        client: ObjectId,
         body: String,
         date: Date
     }],
@@ -37,10 +40,10 @@ Salon = mongoose.model('Salon', {
         price: Number
     }],
     appointments: [{
-        user_id: String,
+        client: ObjectId,
         date: Date,
         service: String
-    }],
+    }]
 
 });
 
@@ -48,7 +51,7 @@ Salon = mongoose.model('Salon', {
 var app = express();
 
 app.configure(function() {
-    app.set('port', process.env.PORT || 8080);
+    app.set('port', process.env.PORT || 8000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.bodyParser());
@@ -74,10 +77,18 @@ app.post('/schedule', function(req, res) {
 
 
 var sv = http.createServer(app);
-var io = require('socket.io').listen(sv);
+io = require('socket.io').listen(sv);
 io.set('log level', 1);
 
-var port = process.env.PORT || 7070;
+io.on('connection', function(socket) {
+    socket.on('message', function(data) {
+        io.sockets.emit('message', data);
+    });
+
+
+});
+
+var port = process.env.PORT || 8080;
 sv.listen(port, function() {
     console.log("Listening on " + port);
 });

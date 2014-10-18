@@ -15,6 +15,10 @@
     </div>
     <h1> Salão de Beleza </h1>
 
+    <input type="text" id="testInput">
+    <button id="testButton">Send</button>
+    <div id="testResponse"></div>
+
 
   <!-- Scripts -->
   <script type="text/javascript" src="js/jquery.js"></script>
@@ -23,6 +27,16 @@
 
 
 <script type="text/javascript"> 
+ var socket = io.connect('/');
+$('#testButton').click(function(){
+	var message = {body: $('#testInput').val()} 
+	socket.emit('message', {body: $('#testInput').val()});
+});
+
+socket.on('message', function(message){
+	message.body = message.body;
+	$('#testResponse').append(message.body).append("<br>");
+});
 
 </script>
 </body>
