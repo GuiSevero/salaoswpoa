@@ -1,4 +1,4 @@
-var MONGOHQ_URL = "mongodb://huia:aaa123@kahana.mongohq.com:10002/app30051564"
+var MONGOHQ_URL = "mongodb://swpoa:salaoswpoa12345@linus.mongohq.com:10057/app30795804";
 
 var express = require('express'),
     http = require('http'),
@@ -6,8 +6,7 @@ var express = require('express'),
     path = require('path'),
     mongoose = require("mongoose"),
     querystring = require('querystring'),
-    _ = require('underscore')
-    //, io = require('socket.io')
+    _ = require('underscore');
 
 mongoose.connect(process.env.MONGOHQ_URL || MONGOHQ_URL);
 Salon = mongoose.model('Salon', {
