@@ -1,0 +1,20 @@
+{
+  "name": "salaoswpoa",
+  "version": "0.0.1",
+  "description": "Startup Weekend PoA",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Guilherme Severo, Guilherme Teixeira",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.4.8",
+    "ejs": "*",
+    "socket.io": "~0.9.16",
+    "ws": "~0.4.31",
+    "mongoose": "~3.8.4",
+    "underscore": "~1.5.2"
+  }
+}
