@@ -13,20 +13,21 @@
 <body>
     <div id="background">
     </div>
-    <h1> Salão de Beleza </h1>
+    <h1> Cadastro de Salão</h1>
 
-    <input type="text" id="testInput">
-    <button id="testButton">Send</button>
-    <div id="testResponse"></div>
+    <form action="/cadastro" method="POST">
+      <input type="text" name="salon[name]" placeholder="Nome"> <br/>
+      <input type="email" name="salon[email]" placeholder="Email"> <br/>
+      <input type="text" name="salon[image]" placeholder="Imagem"> <br/>
+      <input type="text" name="salon[location][cep]" placeholder="CEP"> <br/>
+      <input type="text" name="salon[location][country]" placeholder="País"> <br/>
+      <input type="text" name="salon[location][uf]" placeholder="UF"> <br/>
+      <input type="text" name="salon[location][city]" placeholder="Cidade"> <br/>
+      <input type="text" name="salon[location][street]" placeholder="Rua"> <br/>
+      <input type="text" name="salon[location][number]" placeholder="Número"> <br/>
+      <input type="submit" value="Salvar"> <br/>
+    </form>
 
-    <table>
-    <tr>
-    	<th>Nome</th><th>Email</th>
-    </tr>
-    <% for(var i in saloes) {  %>
-    	<tr><td><%= saloes[i].name %></td><td><%= saloes[i].email %></td></tr>
-    <% } %>
-    </table>
 
   <!-- Scripts -->
   <script type="text/javascript" src="js/jquery.js"></script>

@@ -8,12 +8,12 @@ var express = require('express'),
     querystring = require('querystring'),
     _ = require('underscore');
 
-
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 mongoose.connect(process.env.MONGOHQ_URL || MONGOHQ_URL);
 Salon = mongoose.model('Salon', {
     name: String,
+    email: String,
     image: String,
     location: {
         latitude: Number,
@@ -65,7 +65,29 @@ app.configure(function() {
 
 app.get('/', function(req, res) {
 
-    res.render('index');
+    Salon.find({}, function(err, saloes){
+        res.render('index', {saloes: saloes});
+    });
+
+});
+
+app.get('/cadastro', function(req, res) {
+
+    res.render('cadastro');
+
+});
+
+app.post('/cadastro', function(req, res) {
+
+    //console.log(req.body.salon);
+    var salon = Salon(req.body.salon);
+
+    salon.save(function(err, data) {
+
+        if (err) res.send(500);
+        res.redirect('/');
+        
+    });
 
 });
 
